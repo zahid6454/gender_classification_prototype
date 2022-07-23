@@ -1,0 +1,238 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+body {
+  background-color: #e0e0e0;
+}
+#information_button {
+  font-size: 15px;
+  color: #0072ff;
+  transition: all 0.3s ease;
+  border: 1px solid #0072ff;
+  transition: all 0.3s ease-in-out;
+  border-radius: 5px;
+}
+
+#information_button:hover {
+  background-color: #0072ff;
+  color: white;
+  font-weight: bold;
+  opacity: 1;
+  box-shadow: 0 8px 16px -6px #0072ff;
+}
+#partition_2 {
+  border-left: 1px solid #e0e0e0;
+}
+#card {
+  height: 100%;
+  box-shadow: 0 8px 16px -6px #222222;
+  transition: all 0.3s ease-in-out;
+}
+#card:hover{
+    box-shadow: 0 8px 16px -6px #0072ff;
+}
+#unique_id_input {
+  width: 60%;
+  padding: 7px;
+  outline: none;
+  font-size: 14px;
+  text-decoration: none;
+  color: #4c4a48;
+  font-size: 12px;
+  border: 1px solid #CED4DA;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 5px;
+}
+#unique_id_input:hover{box-shadow: 0 4px 6px -4px #0072ff}
+#unique_id_button{
+  width: 20%;
+  color: #0072ff;
+  font-size: 13px;
+  font-family: "Roboto", sans-serif;
+  letter-spacing: 1px;
+  background-color: white;
+  border: 1px solid #0072ff;
+  transition: all 0.3s ease-in-out;
+}
+#unique_id_button:hover {
+  background-color: #0072ff;
+  border: 1px solid #0072ff;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 8px 10px -6px #4c4a48;
+}
+#first_text_box_header,
+#second_text_box_header {
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+  color: #4c4a48;
+}
+#request_response {
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+}
+#upload_input_field {
+  border: 1px solid #0072ff;
+}
+#single_input {
+  resize: none;
+  font-size: 14px;
+  text-decoration: none;
+  color: #4c4a48;
+  font-size: 12px;
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 5px;
+}
+#bulk_input {
+  margin-bottom: 5px;
+}
+#single_input:hover,
+#bulk_input:hover {
+  box-shadow: 0 4px 6px -4px #0072ff;
+}
+#reset_button {
+  width: 30%;
+  color: #607d8b;
+  font-size: 13px;
+  font-family: "Roboto", sans-serif;
+  background-color: white;
+  border: 1px solid #607d8b;
+  transition: all 0.3s ease-in-out;
+}
+#reset_button:hover {
+  background-color: #607d8b;
+  border: 1px solid #607d8b;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 8px 10px -6px #4c4a48;
+}
+#submit_button_csv,
+#submit_button_fasta,
+#download_file {
+  width: 30%;
+  color: #0072ff;
+  font-size: 13px;
+  font-family: "Roboto", sans-serif;
+  letter-spacing: 1px;
+  background-color: white;
+  border: 1px solid #0072ff;
+  transition: all 0.3s ease-in-out;
+}
+#submit_button_csv, #submit_button_fasta, #download_file, #reset_button {
+  border-radius: 5px;
+}
+#download_file {
+  width: 25%;
+}
+#submit_button_csv:hover,
+#submit_button_fasta:hover,
+#download_file:hover {
+  background-color: #0072ff;
+  border: 1px solid #0072ff;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 8px 10px -6px #4c4a48;
+}
+#csv_input {
+  width: 70%;
+}
+#single_input_warning, #bulk_input_warning, #unique_id_input_warning{
+  color: red;
+  display: none;
+}
+#error_block {
+  height: 100%;
+  text-align: center;
+  display: table;
+  width: 100%;
+}
+#error_block h3 {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  #space_1,
+  #space_2 {
+    display: none;
+  }
+  #unique_id_input{width: 120%; display: block;font-size: 9px;}
+  #unique_id_button{width: 70%; font-size: 9px;}
+  #reset_button{width: 80%;font-size: 9px}
+  #partition_2 {
+    border: none;
+  }
+  #information_button {font-size: 9px; padding: 5px;}
+  #card_title {
+    font-size: 16px;
+  }
+  #card_subtitle {
+    font-size: 13px;
+  }
+  #first_text_box_header,
+  #second_text_box_header {
+    font-size: 12px;
+  }
+  #text_box_format {
+    font-size: 7px;
+  }
+  #submit_button_fasta,
+  #submit_button_csv{
+    font-size: 10px;
+    margin-bottom: 50px;
+    width: 40%;
+  }
+  #single_input {
+    font-size: 10px;
+  }
+  #bulk_input {
+    font-size: 10px;
+  }
+}
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 1080px) {
+  #space_1,
+  #space_2 {
+    display: none;
+  }
+  #unique_id_input{width: 100%; display: block;font-size: 9px;}
+  #unique_id_button{width: 30%; font-size: 9px;}
+  #information_button {font-size: 10px; padding: 5px;}
+  #partition_2 {
+    border: none;
+  }
+  #card_title {
+    font-size: 16px;
+  }
+  #card_subtitle {
+    font-size: 13px;
+  }
+  #first_text_box_header,
+  #second_text_box_header {
+    font-size: 12px;
+  }
+  #text_box_format {
+    font-size: 7px;
+  }
+  #submit_button_fasta,
+  #submit_button_csv,
+  #reset_button {
+    font-size: 10px;
+    margin-bottom: 50px;
+    width: 35%;
+  }
+  #single_input {
+    font-size: 10px;
+  }
+  #bulk_input {
+    font-size: 10px;
+  }
+}

@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-7">
+            <form id="unique_id_form" action="prediction" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <p id="unique_id_input_warning">Please Input Unique ID Before Submit</p>
+                <input id="unique_id_input" name="unique_id_input" type="text"  placeholder="Unique ID - a8055c4f-f862-4a0d-aad8-3a6a7d038ed0">
+                <button id="unique_id_button" class="btn" type="submit">Submit</button>
+            </form>
+        </div>
+        <div class="col-5">
+            <button id="reset_button" class="btn" type="submit" style="float: right;">Reset</button>
+        </div>
+    </div>
+</div>
+
+<br><br>
+
+<div class="row">
+    <div id="partition_1" class="col-md-6">
+        <div class="container">
+            <h6 id="first_text_box_header">Paste Customer's Name</h6>
+            <div class="input-group" style="display: inline-block;">
+                <form id="single_form" action="initializer" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input name="data_type" value="single" style="display: None;">
+                    <p id="single_input_warning">Please Input A Customer's Name Before Submit</p>
+                    <textarea id="single_input" name="single_data" rows="5" cols="60" class="form-control" placeholder="Please Input Customer's Name"></textarea>
+                    <span id="text_box_format" >Customer's Name Must Be  Bengali Name In English.</span><br><br>
+                    <button id="submit_button_fasta" name='submit_single' type="submit" class="btn btn-primary"
+                    style="font-family: 'Nanum Gothic', sans-serif; float: left; margin-right:10px;">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="partition_2" class="col-md-6">
+        <div  class="container" style="display: inline-block;">
+            <h6 id="second_text_box_header">Upload CSV File</h6>
+            <form id="bulk_form" action="initializer" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input name="data_type" value="bulk" style="display: None;">
+                <p id="bulk_input_warning">Please Upload CSV File Before Submit</p>
+                <input id="bulk_input" name="bulk_data" class="form-control custom-file-input" type="file" >
+                <span id="text_box_format">File Must Contain Customer's Name in CUSTOMER_NAME Column</span>
+                <br><br>
+                <button id="submit_button_csv" name='submit_bulk' type="submit" class="btn btn-primary"
+                style="font-family: 'Nanum Gothic', sans-serif">Submit</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<br id="space_2"><hr>
+
+{% if URL %}
+<div id="prediction_url_div" class="row" style="display: block">
+    <h5 id="first_text_box_header">Results</h5>
+    <a id="request_response" href="{{ URL }}">Please Click Here To See Your Results</a>
+{% else %}
+<div class="row" style="display: none">
+{% endif %}
+
+</div>
+
+{% endblock content%}
+
+{% block javascript %}
+    <script>
+        $(".custom-file-input").on("change", function() {
+          var fileName = $(this).val().split("\\").pop();
+          $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+        document.getElementById("reset_button").onclick = function () {
+            document.getElementById("single_input").value = "";
+            document.getElementById("bulk_input").value = "";
+            document.getElementById("unique_id_input").value = "";
+            document.getElementById("unique_id_input_warning").style.display = "none";
+            document.getElementById("single_input_warning").style.display = "none";
+            document.getElementById("bulk_input_warning").style.display = "none";
+            document.getElementById("prediction_url_div").style.display = "none";
+        };
+       document.getElementById("unique_id_form").onsubmit = function () {
+            if (!document.getElementById("unique_id_input").value) {
+                document.getElementById("unique_id_input_warning").style.display = "block";
+                return false;
+            }
+            else{
+                document.getElementById("unique_id_input_warning").style.display = "none";
+            }
+       };
+       document.getElementById("single_form").onsubmit = function () {
+            if (!document.getElementById("single_input").value) {
+                document.getElementById("single_input_warning").style.display = "block";
+                return false;
+            }
+            else{
+                document.getElementById("single_input_warning").style.display = "none";
+            }
+       };
+       document.getElementById("bulk_form").onsubmit = function () {
+            if (!document.getElementById("bulk_input").value) {
+                document.getElementById("bulk_input_warning").style.display = "block";
+                return false;
+            }
+            else{
+                document.getElementById("bulk_input_warning").style.display = "none";
+            }
+       };
+    </script>
+{% endblock javascript %}

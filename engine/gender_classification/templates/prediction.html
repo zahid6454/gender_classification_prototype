@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block content%}
+
+<div class="row">
+    <h3 id="first_text_box_header">Results</h3>
+    {% if status == 'Complete' and request_type == 'single' %}
+    <div id="complete_block_single" style="overflow-x:auto;">
+        <table class="table table-bordered">
+            <thead class="table-primary">
+                <td><b><i>Particulars</i></b></td>
+                <td><b><i>Information</i></b></td>
+            </thead>
+            <tbody>
+                <tr><td>Unique ID</td><td><b>{{ unique_id }}</b></td></tr>
+                <tr><td>Execution Status</td><td><span class="badge bg-success">{{ status }}</span></td></tr>
+                <tr><td>Requested Name</td><td>{{ request_data }}</td></tr>
+                <tr><td>Prediction</td><td><b>{{ prediction }}</b></td></tr>
+                <tr><td>Male Probability</td><td><b>{{ male_probability }}</b></td></tr>
+                <tr><td>Female Probability</td><td><b>{{ female_probability }}</b></td></tr>
+            </tbody>
+        </table>
+    </div>
+    {% elif status == 'Complete' and request_type == 'bulk' %}
+    <div id="complete_block_bulk" style="overflow-x:auto;">
+        <table class="table table-bordered">
+            <thead class="table-primary">
+                <td><b><i>Particulars</i></b></td>
+                <td><b><i>Information</i></b></td>
+            </thead>
+            <tbody>
+                <tr><td>Unique ID</td><td><b>{{ unique_id }}</b></td></tr>
+                <tr><td>Execution Status</td><td><span class="badge bg-success">{{ status }}</span></td></tr>
+                <tr><td>Requested File</td><td>{{ request_data }}</td></tr>
+                <tr><td>Number of Names</td><td><b>{{ number_of_names }}</b></td></tr>
+                <tr><td>Number of Predicted Males</td><td>
+                    <b>{{ number_of_males }}</b>
+                    <input style="display: none;" id="number_of_males" value="{{ number_of_males }}">
+                </td></tr>
+                <tr><td>Number of Predicted Females</td><td>
+                    <b>{{ number_of_females }}</b>
+                    <input style="display: none;" id="number_of_females" value="{{ number_of_females }}">
+                </td></tr>
+                <tr><td>Generated Prediction File</td><td>
+                    <a id="download_file" class="btn btn-primary btn-sm" href="{% url 'download' file_path=prediction %}" download>Download</a>
+                </td></tr>
+                <tr><td>Chart</td><td>
+                        <div class="row">
+                            <div id="piechart"></div>
+                        </div>
+                </td></tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    {% elif status == 'Pending' or status == 'Incomplete' or status == 'Canceled' %}
+    <div id="other_block">
+        <table class="table table-bordered">
+            <thead class="table-primary">
+                <td><b><i>Particulars</i></b></td>
+                <td><b><i>Information</i></b></td>
+            </thead>
+            <tbody>
+                <tr><td>Unique ID</td><td><b>{{ unique_id }}</b></td></tr>
+                {% if status == 'Pending' %}
+                <tr><td>Execution Status</td><td><span class="badge bg-warning">{{ status }}</span></td></tr>
+                {% elif status == 'Incomplete' %}
+                <tr><td>Execution Status</td><td><span class="badge bg-secondary">{{ status }}</span></td></tr>
+                {% elif status == 'Canceled' %}
+                <tr><td>Execution Status</td><td><span class="badge bg-danger">{{ status }}</span></td></tr>
+                {% endif %}
+                <tr><td>Message</td><td>{{ message }}</td></tr>
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock content %}
+
+{% block javascript %}
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+    var number_of_males = parseInt(document.getElementById("number_of_males").value);
+    var number_of_females = parseInt(document.getElementById("number_of_females").value);
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Gender', 'Percentage'],
+            ['Male', number_of_males],
+            ['Female', number_of_females],
+    ]);
+
+    var options = {
+        'title':'Gender Identification Ratio',
+        'width':300,
+        'height':300,
+        'chartArea.top': 0,
+        'chartArea': {
+            'width': '100%',
+            'height': '80%',
+            'left': 50,
+            'top': 50
+         },
+        'is3D': true,
+        'colors': ['#F44336', '#00C853']
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+    chart.draw(data, options);
+}
+</script>
+
+{% endblock javascript %}
+

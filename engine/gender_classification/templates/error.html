@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div id="error_block" align="center">
+    <h3 style="font-family: 'Nanum Gothic', sans-serif; color: #45B649">
+        <span style="font-family: 'Nanum Gothic', sans-serif; color: #ED213A">{{ status_code }}:  </span>
+        {{ message }}
+    </h3>
+</div>
+
+{% endblock content %}
